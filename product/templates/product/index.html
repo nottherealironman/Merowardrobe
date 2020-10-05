@@ -1,0 +1,53 @@
+{% extends 'product_includes/dashboard.html' %}
+{% load static %}
+{% block dashboard_content %}
+    <div class="col-md-9">
+        <a class="btn btn-success" href="{% url 'product:create_product' %}">Add Product</a>
+        <div class="col-md-12">
+        		<table class="table table-striped">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">Product title</th>
+				      <th scope="col">Category</th>
+				      <th scope="col">Brand</th>
+				      <th scope="col">Price</th>
+				      <th scope="col">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  {% if products %}
+					  {% for product in products %}
+						  <tr>
+							  <th scope="row">{{ forloop.counter }}</th>
+							  <td>{{ product.title }}</td>
+							  <td>{{ product.category.title }}, {{ product.subcategory.title }}</td>
+							  <td>{{ product.brand.title }}</td>
+							  <td>Rs.{% firstof product.productdetails.price '0' %}</td>
+							  <td>
+								  <a href="{% url 'product:update_product' product.id %}" class="btn btn-info">
+									  <i class="fa fa-pencil"></i>
+								  </a>
+								  <!-- Delete Product -->
+								  <button type="button" class="btn btn-danger js-remove_product" data-product_id="{{ product.id }}" data-token="{{ csrf_token }}">
+									  <i class="fa fa-trash"></i>
+								  </button>
+							  </td>
+						  </tr>
+					  {% endfor %}
+				  {% else %}
+				  	<tr>
+						<td colspan="6">
+							You haven't added any products yet.
+						</td>
+					</tr>
+				  {% endif %}
+				  </tbody>
+				</table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/product/product.js' %}"></script>
+{% endblock %}

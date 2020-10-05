@@ -1,0 +1,15 @@
+{% for field in form %}
+     <div class="form-group row">
+        <label for="staticEmail" class="col-md-4 col-form-label">{{ field.label_tag }}</label>
+        <div class="col-md-8">
+            <div class="bo4 of-hidden av__input__box m-b-15">
+            {{ field }}
+          {% comment %}<input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">{% endcomment %}
+      </div>
+        </div>
+        <div class="col-sm-offset-2 col-sm-2">
+            <span class="text-danger small">{{ field.errors }}</span>
+        </div>
+    </div>
+{% endfor %}
+

@@ -1,0 +1,6 @@
+{% for field in form %}
+    {% if field.name == 'file' %}
+        <label class="btn btn-primary" id="id_file_label" for="id_file">Upload Image</label>
+    {% endif %}
+        {{ field }}
+{% endfor %}

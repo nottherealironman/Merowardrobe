@@ -1,0 +1,44 @@
+
+{% extends 'product_includes/dashboard.html' %}
+
+{% block dashboard_content %}
+    <div class="col-md-9">
+        {% if store %}
+            <label>STORE INFO</label>
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"style="padding-left:30px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-10">
+                                {{ store.name }}
+                            </div>
+                            <div class="mb-10">
+                                PAN No. {{ store.pan }}
+                            </div>
+                            <div class="mb-10">
+                                <i class="fa fa-phone"></i>
+                                <a href="tel:{{ store.phone }}">{{ store.phone }}</a>
+                                <i class="fa fa-check-circle" style="color:green"></i>
+                            </div>
+                            <div class="mb-10">
+                                <i class="fa fa-map-marker"></i> {{ store.location }}
+                            </div>
+                            <div class="mb-10">
+                                {{ store.description }}
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+              </ul>
+            </div>
+        {% else %}
+            <a class="btn btn-success" href="{% url 'store:create_store' %}">Create Store</a>
+        {% endif %}
+        <div class="col-md-12">
+
+
+        </div>
+    </div>
+{% endblock %}

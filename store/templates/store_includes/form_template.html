@@ -1,0 +1,16 @@
+{% for field in form %}
+    {% if field.name == 'description' %}
+        {{ field }}
+    {% elif field.name == 'pan_uploads' %}
+        <label class="btn btn-primary m-t-15" id="id_pan_uploads_label" for="id_pan_uploads">Click to Upload PAN</label>
+        {{ field }}
+    {% else %}
+        <div class="bo4 av__input__box m-t-15">
+            {{ field }}
+        </div>
+    {% endif %}
+    <div class="col-sm-offset-6 col-sm-6">
+        <span class="text-danger small error_wrapper" id="id_error_{{ field.name }}"></span>
+    </div>
+{% endfor %}
+

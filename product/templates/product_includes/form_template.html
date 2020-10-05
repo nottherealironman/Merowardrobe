@@ -1,0 +1,32 @@
+{% for field in form %}
+    {% if field.name == 'description' or field.name == 'specifications' %}
+        {{ field }}
+    {% elif field.name == 'size' and sizes %}
+        <div class="bo4 av__input__box m-b-15">
+            <select class="sizefull s-text7 p-l-22 p-r-22 chosen-select-js" id="id_size" multiple>
+                <option value="all">All</option>
+                {% for size in sizes %}
+                    {% if size.pk in prod_sizes %}
+                        <option value="{{ size.pk }}" selected>{{ size.title }}</option>
+                    {% else %}
+                        <option value="{{ size.pk }}">{{ size.title }}</option>
+                    {% endif %}
+
+                {% endfor %}
+            </select>
+        </div>
+    {% else %}
+        <div class="bo4 av__input__box m-b-15">
+            {{ field }}
+        </div>
+    {% endif %}
+    <div class="col-sm-offset-2 col-sm-2">
+        {% if field.errors %}
+              {% for error in field.errors %}
+                <span class="text-danger small">{{ error }}</span>
+              {% endfor %}
+        {% endif %}
+
+    </div>
+{% endfor %}
+

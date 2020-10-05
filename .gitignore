@@ -1,0 +1,7 @@
+env/
+media/
+.vscode/
+.idea/
+merowardrobe/.env
+*/__pycache__/*
+**/__pycache__/**

@@ -1,0 +1,96 @@
+{% extends 'product_includes/dashboard.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/cropper.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/chosen/chosen.min.css' %}">
+    <style>
+    .js-crop_button_wrapper{
+        z-index: 99;
+    }
+    </style>
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="col-md-5 p-b-30">
+        <label>ADD PRODUCT</label>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="product_info-tab" data-toggle="tab" href="#product_info" role="tab" aria-controls="product_info" aria-selected="true">
+                    Product Info
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" id="product_details-tab" data-toggle="tab" href="#product_details" role="tab" aria-controls="product_details" aria-selected="false">
+                    Product Details
+                </a>
+            </li>
+            <li class="nav-item"> 
+                <a class="nav-link disabled" id="images_upload-tab" data-toggle="tab" href="#images_upload" role="tab" aria-controls="images_upload" aria-selected="false">
+                    Images Upload
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="product_info" role="tabpanel" aria-labelledby="product_info-tab">
+                <div class="product_add__form">
+                    <form class="leave-comment" id="js-add_product_form" role="form" action="{% url 'product:create_product' %}" method="post" data-load_subcategories_url="{% url 'product:load_subcategories' %}">
+                        {% csrf_token %}
+                        {% include 'product_includes/form_template.html' with form=product  %}
+
+                        <button type="button" class="flex-c-m av__btn__fullwidth bg1 hov1 m-text3 trans-0-4" id="js-add_product_info">
+                            Next
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <input type="hidden" name="product" id="js-product_id" value="{% firstof product_data.id '' %}">
+            <div class="tab-pane fade" id="product_details" role="tabpanel" aria-labelledby="product_details-tab">
+                <div class="product_add__form">
+                    <form class="leave-comment" id="js-add_product_details_form" role="form" action="{% url 'product:add_product_details' %}" method="post">
+                        {% csrf_token %}
+                        {% include 'product_includes/form_template.html' with form=product_details  %}
+                        <button type="button" class="flex-c-m av__btn__fullwidth bg1 hov1 m-text3 trans-0-4" id="js-add_product_details">
+                            Next
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="images_upload" role="tabpanel" aria-labelledby="images_upload-tab">
+                <div class="product_add__form">
+                    <ul class="list-group mb-10" id="uploads_wrapper" data-url="{% url 'product:remove_product_uploads' %}">
+                        {% if uploads is not None %}
+                            {% for upload in uploads %}
+                                <li class='list-group-item uploads_list'>
+                                    <img src="{{ upload.file.url }}" height='100' width='70'>
+                                    <span class='btn btn-danger btn-md pull-right uploads_trash js-remove-upload' data-upload_id='{{ upload.id }}'>
+                                        <i class='fa fa-trash' aria-hidden='true'></i>
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                    <form class="leave-comment" id="js-upload_prod_img_form" role="form" action="{% url 'product:product_uploads' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'product_includes/upload_template.html' with form=product_uploads  %}
+                        <button type="button" class="flex-c-m av__btn__fullwidth bg1 hov1 m-text3 trans-0-4" data-url="{% url 'product:verify_product_uploads' %}" id="js-submit_uploads">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    {# JQUERY FILE UPLOAD SCRIPTS #}
+    {% comment %}<script src="{% static 'js/jquery-file-upload/jquery.ui.widget.js' %}"></script>
+    <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+    <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>{% endcomment %}
+    <script src="{% static 'js/cropper/cropper.min.js' %}"></script>
+    <script src="{% static 'plugins/chosen/chosen.jquery.min.js' %}"></script>
+    <script src="{% static 'js/product/product.js' %}"></script>
+{% endblock %}

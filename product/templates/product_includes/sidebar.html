@@ -1,0 +1,48 @@
+
+<div class="col-md-3 p-b-30">
+    <div class="p-r-20 p-r-0-lg">
+        <div class="custom__sidebar">
+            <label>MY ACCOUNT</label>
+            <ul>
+                <li>
+                    <a href="{% url 'users:user_dashboard' %}" class="sidebar__title">
+                        PERSONAL INFORMATION
+                    </a>
+                </li>
+                <!-- For Retailer -->
+                {% if user.group == 2 %}
+                
+                <li>
+                    <a href="{% url 'product:index' %}" class="sidebar__title">
+                        MY PRODUCTS
+                    </a>
+                </li>
+                <!-- For seller END -->
+                <!-- For Customer -->
+                {% elif user.group == 3 %}
+                <li>
+                    <a href="{% url 'product:index' %}" class="sidebar__title">
+                        MY ORDERS
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'product:index' %}" class="sidebar__title">
+                        MY WISHLIST
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'product:index' %}" class="sidebar__title">
+                        MY REVIEW AND RATING
+                    </a>
+                </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'users:logout_user' %}">Logout</a>
+                </li>
+                {% endif %}
+                <!-- For customer END -->
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{% extends 'product_includes/dashboard.html' %}
+{% load static %}
+{% block dashboard_content %}
+<div class="col-md-6">
+    <label>CREATE STORE</label>
+    <div class="login-form">
+        <form role="form" action="{% url 'store:create_store' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'store_includes/form_template.html' with form=form %}
+            <button class="flex-c-m av__btn__fullwidth bg1 hov1 m-text3 trans-0-4" id="js-add_store">
+                Submit
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/store.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5ukzj91lnbBssrLrusgINSjLyin4zMPQ&libraries=places&callback=initAutocomplete"
+    async defer>
+
+</script>
+{% endblock %}

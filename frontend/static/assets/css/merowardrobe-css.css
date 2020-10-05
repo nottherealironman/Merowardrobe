@@ -1,0 +1,47 @@
+.custom__sidebar li{
+    padding : 0px 0px 5px 0px;
+}
+
+.sidebar__title{
+    font-size: 13px;
+}
+
+.mero__textarea{
+
+}
+
+.product_add__form{
+    margin: 30px 0px 0px 0px;
+}
+
+.av__btn__fullwidth {
+	width: 100%;
+	height: 45px;
+}
+
+.av__input__box{
+    width: 100%;
+    height: 45px;
+}
+
+.mero__textbox {
+	width: 100%;
+	min-height: 120px;
+}
+
+.uploads_list{padding: 5px;margin-bottom: 5px;}
+.uploads_trash{margin: 30px;}
+.hide_input{display: none;}
+
+/*margin bottom 10px*/
+.mb-10{
+	margin-bottom: 10px; 
+}
+
+.mb-10{
+	margin-bottom: 10px;
+}
+
+.input-feedback {
+  color: red;
+}

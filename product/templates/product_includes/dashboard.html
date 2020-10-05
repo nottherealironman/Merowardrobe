@@ -1,0 +1,12 @@
+{% extends 'includes/base.html' %}
+{% block content %}
+    <section class="bgwhite p-t-66 p-b-60">
+        <div class="container">
+            <div class="row">
+                {% include "product_includes/sidebar.html" %}
+                {% block dashboard_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
